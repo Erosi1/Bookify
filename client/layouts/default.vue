@@ -1,27 +1,25 @@
 <template>
-<div>
-  <Navbar/>
-  <Index/>
-  <Footer/>
-</div>
-
-
-
-
+  <div>
+    <Navbar/>
+    <nuxt/>
+    <Footer/>
+  </div>
 </template>
-
 <script>
-import Index from '~/pages/index'
-import Navbar from "~/components/Navbar";
-import Footer from "~/components/Footer";
-export default {
-  components: {
- Navbar,
- Footer,
-  Index
-},
-}
-
-
+  import Navbar from "~/components/Navbar"
+  import Footer from "~/components/Footer"
+  export default {
+    components:{
+      Navbar,
+      Footer
+    }
+  }
 </script>
 
+<style>
+body{
+  font-size: 13px;
+  line-height: 19px;
+  color:#111;
+}
+</style>
