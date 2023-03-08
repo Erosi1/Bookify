@@ -6,7 +6,7 @@
         <div class="col-sm-6">
           <div class="a-spacing-top-medium"></div>
           <h2>Profile Page</h2>
-          <a href="#" @click="onLogout">Logout</a>
+
           <form>
            <!--Name-->
 <div class="a-spacing-top-medium">
@@ -29,6 +29,13 @@
                 <span class="a-button-register">
                   <span class="a-button-inner">
                     <span class="a-button-text" @click="onUpdateProfile">Update Profile</span>
+                  </span>
+                </span>
+              </div>
+              <div class="a-spacing-top-large">
+                <span class="a-button-register">
+                  <span class="a-button-inner">
+                   <span class="a-button-text" @click="onLogout">Logout</span>
                   </span>
                 </span>
               </div>

@@ -12,8 +12,7 @@ const s3 = new aws.S3();
 const upload = multer({
     storage: multerS3({
         s3: s3,
-        bucket:'amazonbucketweb',
-        acl: 'public-read',
+        bucket:'erosbucket06',
         metadata: (req, file, cb) =>{
             cb(null, { fieldName: file.fieldname});
         },

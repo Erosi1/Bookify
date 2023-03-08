@@ -7,7 +7,7 @@
         <ul class="a-unordered-list a-horizontal a-size-small">
           <li>
             <span class="a-list-item">
-              <a class="a-link-normal a-color-tertiary" href="#">{{product.category.type}}</a>
+              <a class="a-link-normal a-color-tertiary" href="#">{{ product.category.type }}</a>
             </span>
           </li>
           <li>
@@ -15,7 +15,7 @@
           </li>
           <li>
             <span class="a-list-item">
-              <a class="a-link-normal a-color-tertiary" href="#">{{product.title}}</a>
+              <a class="a-link-normal a-color-tertiary" href="#">{{ product.title }}</a>
             </span>
           </li>
         </ul>
@@ -51,7 +51,7 @@
                     <!-- Author's Name -->
                     <div class="col-xl-4 col-lg-3 col-md-3 col-sm-3 col-3">
                       <div class="authorNameCol">
-                        <a href="#">{{product.owner.name}}</a>
+                        <a href="#">{{ product.owner.name }}</a>
                       </div>
                     </div>
                     <!-- Author's Follow Button -->
@@ -77,7 +77,7 @@
               <!-- Product Title -->
               <div class="titleDiv">
                 <h1 class="productTitle">
-                  <span class="largeTitle">{{product.title}}</span>
+                  <span class="largeTitle">{{ product.title }}</span>
                   <span class="smallTitle">Paperback</span>
                 </h1>
               </div>
@@ -85,14 +85,50 @@
               <div class="bylineinfo">
                 by
                 <a href="#" class="authorName">
-                 {{product.owner.name}}
+                  {{ product.owner.name }}
                   <i
                     class="fas fa-chevron-down"
                     style="font-size: 8px !important; color: #555 !important;"
                   ></i>
-                </a> (Author)
+                </a>
+                (Author)
               </div>
-              <div class="reviewGroup"></div>
+              <div class="  ">
+                <client-only>
+                  <star-rating
+                    :rating="averageRating"
+                    :show-rating="false"
+                    :increment="0.5"
+                    :glow="1"
+                    :border-width="1"
+                    :rounded-corners="true"
+                    :read-only="true"
+                    :star-size="18"
+                    :star-points="[
+                      12,
+                      2,
+                      14,
+                      17,
+                      0,
+                      19,
+                      10,
+                      34,
+                      7,
+                      50,
+                      23,
+                      43,
+                      38,
+                      50,
+                      36,
+                      34,
+                      46,
+                      19,
+                      31,
+                      17
+                    ]"
+                  ></star-rating>
+                </client-only>
+              </div>
               <hr style="margin-top: 10px;" />
               <!-- A tags Dummy Data -->
               <div class="mediaMatrix">
@@ -150,7 +186,8 @@
                           <a href="#" class="a-size-mini">
                             <span class="kcpAppBox">
                               <span class="a-declarative">
-                                <span class="a-text-bold">Free App</span> with your Audible Trial
+                                <span class="a-text-bold">Free App</span> with
+                                your Audible Trial
                               </span>
                             </span>
                           </a>
@@ -176,7 +213,7 @@
               </div>
               <!-- Description -->
               <div class="bookDescription">
-                <div class="bookDescriptionInner">{{product.description}}</div>
+                <div class="bookDescriptionInner">{{ product.description }}</div>
               </div>
 
               <!-- Product specification -->
@@ -213,7 +250,9 @@
 
                     <!-- Product Price -->
                     <div class="float-right">
-                      <span class="a-size-medium a-color-price offer-price a-text-normal">${{product.price}}</span>
+                      <span
+                        class="a-size-medium a-color-price offer-price a-text-normal"
+                      >${{ product.price }}</span>
                     </div>
                   </div>
                 </div>
@@ -245,7 +284,7 @@
                 </div>
 
                 <div class="a-section">
-                  <div class="a-button-stack">
+                  <div class="a-button-stack" @click="addProductToCart(product)">
                     <span class="a-spacing-small a-button-primary a-button-icon">
                       <span class="a-button-inner">
                         <i class="a-icon a-icon-cart"></i>
@@ -268,9 +307,14 @@
                   <div class="a-spacing-top-small">
                     <div class="a-section a-spacing-none">
                       <div class="a-section a-spacing-none a-spacing-top-mini">
-                        This item shipts to
-                        <b>California</b>
-                        <b>Get it by Monday, Sept 23 - Monday, Sept. 30</b>
+                        This item ships to
+                        <template v-if="$auth.$state.loggedIn">
+                          <b>$auth.$state.user.address.city</b>
+                        </template>
+                        <template v-else>
+                          <b>city</b>
+                        </template>
+                        <b>Get it by Monday, January 20 - Monday, January 27</b>
                         Choose this date at checkout
                       </div>
                     </div>
@@ -281,7 +325,13 @@
                   <a href="#" class="a-link-normal">
                     <div class="a-row a-spacing-mini">
                       <i class="fal fa-map-market-alt"></i>
-                      <span class="a-size-small">Deliver to California</span>
+                      <span class="a-size-small">
+                        Deliver to
+                        <template
+                          v-if="$auth.$state.loggedIn"
+                        >$auth.$state.user.address.city</template>
+                        <template v-else>city</template>
+                      </span>
                     </div>
                   </a>
                 </span>
@@ -296,7 +346,7 @@
                       </form>
                     </div>
                     <div class="float-right">
-                      <span class="a-color-base offer-price a-text-normal">${{product.price}}</span>
+                      <span class="a-color-base offer-price a-text-normal">{{ product.price }}</span>
                     </div>
                   </div>
                 </div>
@@ -335,30 +385,55 @@
                 <div class="col-md-10 col-sm-8 col-8 pl-0">
                   <div class="mainContent">
                     <h3>Biography</h3>
-                    <div id="authorBio">{{product.owner.about}}</div>
+                    <div id="authorBio">{{ product.owner.about }}</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <ReviewSection :product="product" :reviews="reviews" />
       </div>
     </div>
   </main>
 </template>
-<script>
-export default {
-async asyncData({$axios,params}){
-  try{
-let response=await $axios.$get(`/api/products/${params.id}`);
-console.log(response);
-return {
-  product:response.product
-};
-  }catch(err){
-console.log(err);
-  }
-}
 
+<script>
+
+import StarRating from "vue-star-rating";
+import ReviewSection from "~/components/ReviewSection";
+export default {
+  components: {
+    StarRating,
+    ReviewSection
+  },
+  async asyncData({ $axios, params }) {
+    try {
+      let singleProduct = $axios.$get(`/api/products/${params.id}`);
+      let manyReviews = $axios.$get(`/api/reviews/${params.id}`);
+      const [productResponse, reviewsResponse] = await Promise.all([
+        singleProduct,
+        manyReviews
+      ]);
+      return {
+        product: productResponse.product,
+        reviews: reviewsResponse.reviews
+      };
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  computed: {
+    averageRating() {
+      if (this.reviews.length > 0) {
+        let sum = this.reviews.reduce((total, review) => {
+          return total + review.rating;
+        }, 0);
+        return parseFloat((sum / this.reviews.length).toFixed(1));
+      }
+      return 0;
+    }
+  }
 };
 </script>
