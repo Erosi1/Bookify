@@ -93,7 +93,7 @@
                 </a>
                 (Author)
               </div>
-              <div class="  ">
+              <div class="reviewGroup">
                 <client-only>
                   <star-rating
                     :rating="averageRating"
@@ -309,7 +309,7 @@
                       <div class="a-section a-spacing-none a-spacing-top-mini">
                         This item ships to
                         <template v-if="$auth.$state.loggedIn">
-                          <b>$auth.$state.user.address.city</b>
+                          <b>{{$auth.$state.user.address.city}}</b>
                         </template>
                         <template v-else>
                           <b>city</b>
@@ -329,7 +329,7 @@
                         Deliver to
                         <template
                           v-if="$auth.$state.loggedIn"
-                        >$auth.$state.user.address.city</template>
+                        >{{$auth.$state.user.address.city}}</template>
                         <template v-else>city</template>
                       </span>
                     </div>
@@ -399,7 +399,7 @@
 </template>
 
 <script>
-
+import { mapActions } from "vuex";
 import StarRating from "vue-star-rating";
 import ReviewSection from "~/components/ReviewSection";
 export default {
@@ -423,7 +423,9 @@ export default {
       console.log(err);
     }
   },
-
+  methods: {
+    ...mapActions(["addProductToCart"])
+  },
   computed: {
     averageRating() {
       if (this.reviews.length > 0) {
