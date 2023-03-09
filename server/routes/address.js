@@ -40,7 +40,7 @@ router.get("/addresses/:id", verifyToken, async (req, res) => {
 // Call Countries API
 router.get("/countries", async (req, res) => {
   try {
-    const response = await axios.get("https://restcountries.eu/rest/v2/all");
+    const response = await axios.get("https://restcountries.com/v2/all");
     res.json(response.data);
   } catch (err) {
     res.status(500).json({

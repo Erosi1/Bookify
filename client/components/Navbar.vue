@@ -5,12 +5,12 @@
         <div class="row">
           <!-- Logo -->
           <div class="col-sm-2">
-            <div class="logo-area">
-              <nuxt-link to="/">
-                <img src="/img/logo.png" alt="logo" class="img-fluid" />
-              </nuxt-link>
-            </div>
-          </div>
+  <div class="logo-area">
+    <nuxt-link to="/">
+      <img src="/img/bookify.png" alt="logo" class="img-fluid" width="700" height="700" />
+    </nuxt-link>
+  </div>
+</div>
           <!-- Search Bar -->
           <div class="col-sm-6 pt-0">
             <Search />
@@ -59,7 +59,7 @@
               <div class="nav-xshop-container">
                 <div class="nav-xshop">
                   <a href="#" class="nav-a">Today's deals</a>
-                  <a href="#" class="nav-a">Your amazon.com</a>
+                  <a href="#" class="nav-a">Your bookify.com</a>
                   <a href="#" class="nav-a">Gift cards</a>
                   <a href="#" class="nav-a">Registry</a>
                   <a href="#" class="nav-a">Sell</a>
