@@ -27,11 +27,14 @@
                   <span class="nav-line-1" id="glow-ingress-line1"
                     >Deliever To</span
                   >
-                  <template v-if="$auth.$state.loggedIn">
-                    <span class="nav-line-2" id="glow-ingress-line1">
-                      {{ $auth.$state.user.address.city }}
-                    </span>
-                  </template>
+                  <template v-if="$auth.$state.loggedIn && $auth.$state.user.address">
+  <span class="nav-line-2" id="glow-ingress-line1">
+    {{ $auth.$state.user.address.city }}
+  </span>
+</template>
+
+
+
                   <template v-else>
                     <span class="nav-line-2" id="glow-ingress-line1"
                       >Address</span
@@ -63,6 +66,17 @@
                   <a href="#" class="nav-a">Gift cards</a>
                   <a href="#" class="nav-a">Registry</a>
                   <a href="#" class="nav-a">Sell</a>
+                  <template v-if="$auth.$state.loggedIn">
+                    <div v-if="$auth.$state.user.email === 'admineros@gmail.com'">
+    <a href="#" class="nav-a" @click.prevent="redirectToDashboard()">Dashboard</a>
+  </div></template>
+
+
+
+
+
+
+
                 </div>
               </div>
             </div>
@@ -133,6 +147,7 @@
                   >{{ getCartLength }}</span
                 >
               </nuxt-link>
+
             </div>
           </div>
         </div>
@@ -145,11 +160,27 @@
 import { mapGetters } from "vuex";
 import Search from "~/components/Search";
 export default {
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: ""
+    };
+  },
   components: {
     Search
   },
   computed: {
-    ...mapGetters(["getCartLength"])
+    ...mapGetters(["getCartLength"]),
+
+  },
+  methods:{
+    async redirectToDashboard() {
+
+            window.location.replace('http://localhost:3000');
+          }
+
+    },
   }
-};
+;
 </script>

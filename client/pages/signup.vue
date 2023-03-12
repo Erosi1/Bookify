@@ -70,38 +70,40 @@
 
 <script>
 export default {
-    layout:"none",
-      middleware:"auth",
-  auth:"guest",
-    data(){
-        return {name:"",
-            email:"",
-            password:""}
-    },
-    methods:{
-        async onSignup(){
-            try {
-                let  data={
-                    name:this.name,
-                    email:this.email,
-                    password:this.password
-                }
-                let response=await this.$axios.$post("/api/auth/signup",data);
-
-                if (response.success){
-
-                    await this.$auth.loginWith("local",{
-                       data:{ email:this.email,
-                        password:this.password}
-                    })
-                    this.$router.push("/")
-                }
-            } catch (error) {
-                console.log(error)
-            }
+  layout: "none",
+  middleware: "auth",
+  auth: "guest",
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    async onSignup() {
+      try {
+        let data = {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        };
+        let response = await this.$axios.$post("/api/auth/signup", data);
+        if (response.success) {
+          await this.$auth.loginWith("local", {
+            data: {
+              email: this.email,
+              password: this.password,
+            },
+          });
+          this.$router.push("/");
         }
-    }
-}
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+};
 </script>
 
 <style>

@@ -87,8 +87,6 @@ export default {
         let res = await this.$auth.loginWith("local", {
           data: { email: this.email, password: this.password }
         });
-
-
       } catch (error) {
         console.log(error);
         this.error="Authentication failed"

@@ -31,44 +31,6 @@ ProductSchema.virtual("averageRating").get(function () {
   return 0;
 });
 
-// ProductSchema.virtual("IndividualRating").get(function () {
-//   let a = 0;
-//   let b = 0;
-//   let c = 0;
-//   let d = 0;
-//   let e = 0;
-
-//   this.reviews.map((review) => {
-//     if (review.rating === 5) {
-//       a++;
-//     }
-//     if (review.rating === 4) {
-//       b++;
-//     }
-//     if (review.rating === 3) {
-//       c++;
-//     }
-//     if (review.rating === 2) {
-//       d++;
-//     }
-//     if (review.rating === 1) {
-//       e++;
-//     }
-//   });
-//   let arr = [a, b, c, d, e];
-
-//   return arr;
-// });
-
-// ProductSchema.virtual("TotalRating").get(function () {
-//   let arr1 = this.IndividualRating;
-//   let sum = 0;
-//   for (let i = 0; i < 4; i++) {
-//     sum += arr1.pop();
-//   }
-
-//   return sum;
-// });
 
 ProductSchema.plugin(mongooseAlgolia, {
   appId: process.env.ALGOLIA_APP_ID,
@@ -79,7 +41,7 @@ ProductSchema.plugin(mongooseAlgolia, {
     path: "owner reviews",
   },
 
-  debug: true, // Default: false -> If true operations are logged out in your console
+  debug: true, 
 });
 
 let Model = mongoose.model("Product", ProductSchema);
